@@ -34,9 +34,9 @@ df = pd.merge(sample, players)
 # Set conditions depending on player position
 conditions = [df['element_type'] == 1 | df['element_type'] == 2,
               (df['element_type'] == 3), (df['element_type'] == 4)]
-choices = [((df['goal_percent'] * 6) + (df['assist_percent'] * 3) + (df['cs_percent'] * 4) + 2), ((df['goal_percent'] * 5) + (
-    df['assist_percent'] * 3) + (df['cs_percent'] * 1) + 2), ((df['goal_percent'] * 4) + (
-        df['assist_percent'] * 3) + 2)]
+choices = [((df['goal_odds'] * 6) + (df['assist_odds'] * 3) + (df['cs_odds'] * 4) + 2), ((df['goal_odds'] * 5) + (
+    df['assist_odds'] * 3) + (df['cs_odds'] * 1) + 2), ((df['goal_odds'] * 4) + (
+        df['assist_odds'] * 3) + 2)]
 
 # Evaluate projected points based on
 df['projected_points'] = np.select(conditions, choices)
