@@ -1,7 +1,7 @@
 # fplbythebooks
 A python application which uses gambling odds to predict Fantasy Premier League points
 
-## How does it work
+## How does it work?
 Every week bookmakers put out gambling odds for the likelihood of each player scoring a goal or a team to keep a clean sheet, and these odds can be converted to percentages. By using these percentages, with the help of the FPL API, fplbythebooks makes a prediction for the number of fantasy points a player will score each matchweek.
 
 ## Usage
