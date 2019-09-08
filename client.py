@@ -131,11 +131,13 @@ sample = get_odds(fixtures)
 # Get clean sheet odds
 cs = get_cs(fixtures)
 
+
 # Parse only the relevant data from the FPl API
 players = players[['id', 'first_name',
-                   'second_name', 'element_type', 'now_cost', 'team_code']]
+                   'second_name', 'element_type', 'now_cost', 'team_code', 'minutes']]
 players['name'] = players['first_name'] + " " + players["second_name"]
 players = players.drop(columns=['first_name', 'second_name'])
+players = players[players.minutes > 90]
 
 # Convert team codes into team names
 conditions = [players['team_code'] == 1, players['team_code'] == 3, players['team_code'] == 4, players['team_code'] == 6, players['team_code'] == 7, players['team_code'] == 8, players['team_code'] == 11, players['team_code'] == 13, players['team_code'] == 14, players['team_code'] ==
@@ -162,6 +164,8 @@ choices = [(((df['goal_percent']/100) * 6) + ((df['cs_percent']/100) * 4) + 2),
 df['projected_points'] = np.select(conditions, choices)
 
 df = df.sort_values(by=['projected_points'], ascending=False)
+df = df.drop(columns=['id', 'element_type', 'now_cost',
+                      'team_code', 'team_name', 'minutes'])
 
 # Export the points projection
 print("Exporting projected points to csv")
